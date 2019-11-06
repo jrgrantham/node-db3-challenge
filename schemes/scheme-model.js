@@ -5,8 +5,8 @@ const db = knex(config.development)
 
 module.exports = {
   find,
-  findById
-  // findSteps,
+  findById,
+  findSteps
   // add,
   // update,
   // remove
@@ -21,4 +21,11 @@ function findById(id) {
     .where({'schemes.id': id})
 }
 
-findSteps
+function findSteps(id) {
+  return db('steps')
+    .join('schemes', 'schemes.id', 'steps.scheme_id')
+    .select('schemes.scheme_name', 'steps.step_number', 'steps.instructions')
+    .where({ 'schemes.id': id })
+    .orderBy('step_number', 'asc')
+}
+
