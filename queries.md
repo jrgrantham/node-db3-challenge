@@ -9,7 +9,7 @@ join categories
 
 ### Display the OrderID and ShipperName for all orders placed before January 9, 1997. Shows 161 records.
 
-select *
+select orderid, shippername
 from orders
 join shippers
 	on orders.shipperid = shippers.shipperid
@@ -17,7 +17,20 @@ where orderdate < '1997-01-09'
 
 ### Display all ProductNames and Quantities placed on order 10251. Sort by ProductName. Shows 3 records.
 
+select orderid, productname, quantity
+from OrderDetails
+join products
+	on orderdetails.productid = products.productid
+where orderid = 10251
+
 ### Display the OrderID, CustomerName and the employee's LastName for every order. All columns should be labeled clearly. Displays 196 records.
+
+select orderid as 'order', customername as customer, lastname as employee
+from orders
+join customers
+	on orders.customerid = customers.customerid
+join employees
+	on orders.employeeid = employees.employeeid
 
 ### (Stretch)  Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 9 records.
 
