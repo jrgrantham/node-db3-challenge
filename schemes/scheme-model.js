@@ -9,7 +9,8 @@ module.exports = {
   findSteps,
   add,
   update,
-  remove
+  remove,
+  addStep
 }
 
 function find() {
@@ -51,4 +52,10 @@ function remove(id) {
   return db('schemes')
     .where({id})
     .del()
+}
+
+async function addStep(newStep, id) {
+  await db('steps')
+    .insert({...newStep, 'scheme_id': id});
+  return findSteps(id)
 }
